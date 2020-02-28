@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { ModelJob, ManagerJobListResponse } from '../api/models';
 import { JobsService } from '../api/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -12,13 +13,13 @@ import { JobsService } from '../api/services';
 })
 export class OverviewComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id', 'pipeline', 'status', 'progress'];
+  public displayedColumns: string[] = ['id', 'name', 'status', 'progress'];
 
   public jobs: Array<ModelJob>;
   public dataSource = new MatTableDataSource<ModelJob>(this.jobs);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(public api: JobsService) { }
+  constructor(public router: Router, public api: JobsService) { }
 
   ngOnInit(): void {
     this.loadOverview();
@@ -37,4 +38,7 @@ export class OverviewComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  onRowClicked(row: ModelJob): void {
+    this.router.navigate([`/details/${row.id}`]);
+  }
 }
