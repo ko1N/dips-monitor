@@ -13,10 +13,10 @@ import { RestJobInfoResponse } from '../models/rest-job-info-response';
 @Injectable({
   providedIn: 'root',
 })
-class ApiService extends __BaseService {
+class JobsService extends __BaseService {
   static readonly executeJobPath = '/manager/job/execute';
   static readonly jobListPath = '/manager/job/list';
-  static readonly pipelineInfoPath = '/manager/jobs/info/{job_id}';
+  static readonly jobInfoPath = '/manager/jobs/info/{job_id}';
 
   constructor(
     config: __Configuration,
@@ -103,7 +103,7 @@ class ApiService extends __BaseService {
    * @param job_id Job ID
    * @return OK
    */
-  pipelineInfoResponse(jobId: string): __Observable<__StrictHttpResponse<RestJobInfoResponse>> {
+  jobInfoResponse(jobId: string): __Observable<__StrictHttpResponse<RestJobInfoResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -130,14 +130,14 @@ class ApiService extends __BaseService {
    * @param job_id Job ID
    * @return OK
    */
-  pipelineInfo(jobId: string): __Observable<RestJobInfoResponse> {
-    return this.pipelineInfoResponse(jobId).pipe(
+  jobInfo(jobId: string): __Observable<RestJobInfoResponse> {
+    return this.jobInfoResponse(jobId).pipe(
       __map(_r => _r.body as RestJobInfoResponse)
     );
   }
 }
 
-module ApiService {
+module JobsService {
 }
 
-export { ApiService }
+export { JobsService }

@@ -3,7 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
-import { ApiService } from './services/api.service';
+import { JobsService } from './services/jobs.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -18,7 +18,7 @@ import { ApiService } from './services/api.service';
   declarations: [],
   providers: [
     ApiConfiguration,
-    ApiService
+    JobsService
   ],
 })
 export class ApiModule {

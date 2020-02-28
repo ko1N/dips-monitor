@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RestJobListResponse, ModelJob } from '../api/models';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ApiService } from '../api/services';
+import { MatTableDataSource } from '@angular/material/table';
+
+import { ModelJob, RestJobListResponse } from '../api/models';
+import { JobsService } from '../api/services';
 
 @Component({
   selector: 'app-overview',
@@ -17,7 +18,7 @@ export class OverviewComponent implements OnInit {
   public dataSource = new MatTableDataSource<ModelJob>(this.jobs);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(public api: ApiService) { }
+  constructor(public api: JobsService) { }
 
   ngOnInit(): void {
     this.loadOverview();
