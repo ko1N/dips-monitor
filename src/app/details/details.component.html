@@ -1,0 +1,25 @@
+<div class="details" *ngIf="job">
+
+    <mat-accordion *ngFor="let stage of job.stages">
+        <mat-card>
+            {{ stage.name }}
+        </mat-card>
+        <p></p>
+
+        <mat-expansion-panel *ngFor="let task of stage.tasks">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ task.name }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    ({{ task.progress }}%)
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="console">
+                <div *ngFor="let outmsg of task.stdout">{{ outmsg }}</div>
+            </div>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+</div>

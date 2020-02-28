@@ -1,5 +1,5 @@
 /* tslint:disable */
 import { ModelJob } from './model-job';
-export interface RestJobListResponse {
+export interface ManagerJobListResponse {
   jobs?: Array<ModelJob>;
 }

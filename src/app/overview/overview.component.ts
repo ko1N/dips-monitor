@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { ModelJob, RestJobListResponse } from '../api/models';
+import { ModelJob, ManagerJobListResponse } from '../api/models';
 import { JobsService } from '../api/services';
 
 @Component({
@@ -26,7 +26,7 @@ export class OverviewComponent implements OnInit {
 
   loadOverview(): void {
     this.api.jobList()
-      .subscribe((resp: RestJobListResponse) => {
+      .subscribe((resp: ManagerJobListResponse) => {
         this.jobs = resp.jobs;
         this.updateDatasource();
       })

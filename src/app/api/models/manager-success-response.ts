@@ -1,4 +1,4 @@
 /* tslint:disable */
-export interface RestSuccessResponse {
+export interface ManagerSuccessResponse {
   status?: string;
 }

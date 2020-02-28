@@ -1,5 +1,5 @@
 /* tslint:disable */
-export interface RestFailureResponse {
+export interface ManagerFailureResponse {
   error?: string;
   status?: string;
 }

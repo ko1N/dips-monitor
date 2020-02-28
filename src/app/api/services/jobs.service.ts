@@ -7,16 +7,16 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { RestSuccessResponse } from '../models/rest-success-response';
-import { RestJobListResponse } from '../models/rest-job-list-response';
-import { RestJobInfoResponse } from '../models/rest-job-info-response';
+import { ManagerSuccessResponse } from '../models/manager-success-response';
+import { ManagerJobInfoResponse } from '../models/manager-job-info-response';
+import { ManagerJobListResponse } from '../models/manager-job-list-response';
 @Injectable({
   providedIn: 'root',
 })
 class JobsService extends __BaseService {
   static readonly executeJobPath = '/manager/job/execute';
+  static readonly jobInfoPath = '/manager/job/info/{job_id}';
   static readonly jobListPath = '/manager/job/list';
-  static readonly jobInfoPath = '/manager/jobs/info/{job_id}';
 
   constructor(
     config: __Configuration,
@@ -30,7 +30,7 @@ class JobsService extends __BaseService {
    * @param pipeline Pipeline Script
    * @return OK
    */
-  executeJobResponse(pipeline: string): __Observable<__StrictHttpResponse<RestSuccessResponse>> {
+  executeJobResponse(pipeline: string): __Observable<__StrictHttpResponse<ManagerSuccessResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -48,7 +48,7 @@ class JobsService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<RestSuccessResponse>;
+        return _r as __StrictHttpResponse<ManagerSuccessResponse>;
       })
     );
   }
@@ -57,9 +57,47 @@ class JobsService extends __BaseService {
    * @param pipeline Pipeline Script
    * @return OK
    */
-  executeJob(pipeline: string): __Observable<RestSuccessResponse> {
+  executeJob(pipeline: string): __Observable<ManagerSuccessResponse> {
     return this.executeJobResponse(pipeline).pipe(
-      __map(_r => _r.body as RestSuccessResponse)
+      __map(_r => _r.body as ManagerSuccessResponse)
+    );
+  }
+
+  /**
+   * This method will return a single job by it's id or an error.
+   * @param job_id Job ID
+   * @return OK
+   */
+  jobInfoResponse(jobId: string): __Observable<__StrictHttpResponse<ManagerJobInfoResponse>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/manager/job/info/${jobId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ManagerJobInfoResponse>;
+      })
+    );
+  }
+  /**
+   * This method will return a single job by it's id or an error.
+   * @param job_id Job ID
+   * @return OK
+   */
+  jobInfo(jobId: string): __Observable<ManagerJobInfoResponse> {
+    return this.jobInfoResponse(jobId).pipe(
+      __map(_r => _r.body as ManagerJobInfoResponse)
     );
   }
 
@@ -67,7 +105,7 @@ class JobsService extends __BaseService {
    * This method will return a list of all jobs
    * @return OK
    */
-  jobListResponse(): __Observable<__StrictHttpResponse<RestJobListResponse>> {
+  jobListResponse(): __Observable<__StrictHttpResponse<ManagerJobListResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -84,7 +122,7 @@ class JobsService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<RestJobListResponse>;
+        return _r as __StrictHttpResponse<ManagerJobListResponse>;
       })
     );
   }
@@ -92,47 +130,9 @@ class JobsService extends __BaseService {
    * This method will return a list of all jobs
    * @return OK
    */
-  jobList(): __Observable<RestJobListResponse> {
+  jobList(): __Observable<ManagerJobListResponse> {
     return this.jobListResponse().pipe(
-      __map(_r => _r.body as RestJobListResponse)
-    );
-  }
-
-  /**
-   * This method will return a single job by it's id or an error.
-   * @param job_id Job ID
-   * @return OK
-   */
-  jobInfoResponse(jobId: string): __Observable<__StrictHttpResponse<RestJobInfoResponse>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/manager/jobs/info/${jobId}`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<RestJobInfoResponse>;
-      })
-    );
-  }
-  /**
-   * This method will return a single job by it's id or an error.
-   * @param job_id Job ID
-   * @return OK
-   */
-  jobInfo(jobId: string): __Observable<RestJobInfoResponse> {
-    return this.jobInfoResponse(jobId).pipe(
-      __map(_r => _r.body as RestJobInfoResponse)
+      __map(_r => _r.body as ManagerJobListResponse)
     );
   }
 }
