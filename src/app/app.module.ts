@@ -14,13 +14,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsComponent } from './details/details.component';
 import { OverviewComponent } from './overview/overview.component';
+import { ConsoleComponent } from './console/console.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    DetailsComponent
+    DetailsComponent,
+    ConsoleComponent
   ],
   imports: [
     BrowserModule,
