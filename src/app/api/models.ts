@@ -1,5 +1,5 @@
 export { ManagerFailureResponse } from './models/manager-failure-response';
-export { ManagerJobInfoResponse } from './models/manager-job-info-response';
+export { ManagerJobDetailsResponse } from './models/manager-job-details-response';
 export { ManagerJobListResponse } from './models/manager-job-list-response';
 export { ManagerPipelineCreateResponse } from './models/manager-pipeline-create-response';
 export { ManagerPipelineDetailsResponse } from './models/manager-pipeline-details-response';

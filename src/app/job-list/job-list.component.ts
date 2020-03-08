@@ -3,17 +3,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-import { ModelJob } from '../api/models';
+import { ModelJob, ManagerJobListResponse } from '../api/models';
 import { JobsService } from '../api/services';
 
 @Component({
-  selector: 'app-joblist',
-  templateUrl: './joblist.component.html',
-  styleUrls: ['./joblist.component.sass']
+  selector: 'app-job-list',
+  templateUrl: './job-list.component.html',
+  styleUrls: ['./job-list.component.sass']
 })
-export class JoblistComponent implements OnInit {
+export class JobListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id', 'name', 'status', 'progress'];
+  public displayedColumns: string[] = ['id', 'name', 'status', 'progress', 'options'];
 
   public jobs: Array<ModelJob>;
   public dataSource = new MatTableDataSource<ModelJob>(this.jobs);
@@ -26,13 +26,11 @@ export class JoblistComponent implements OnInit {
   }
 
   loadOverview(): void {
-    /*
     this.jobsApi.jobList()
       .subscribe((resp: ManagerJobListResponse) => {
         this.jobs = resp.jobs;
         this.updateDatasource();
-      })
-      */
+      });
   }
 
   updateDatasource(): void {
@@ -40,7 +38,8 @@ export class JoblistComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  onRowClicked(row: ModelJob): void {
-    this.router.navigate([`/details/${row.id}`]);
+  showJob(element: ModelJob): void {
+    this.router.navigateByUrl(`/job/${element.id}`);
   }
+
 }

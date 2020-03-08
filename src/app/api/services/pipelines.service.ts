@@ -16,7 +16,7 @@ import { ManagerPipelineExecuteRequest } from '../models/manager-pipeline-execut
   providedIn: 'root',
 })
 class PipelinesService extends __BaseService {
-  static readonly createPipelinePath = '/manager/pipeline/';
+  static readonly pipelineCreatePath = '/manager/pipeline/';
   static readonly pipelineListPath = '/manager/pipeline/all';
   static readonly pipelineDetailsPath = '/manager/pipeline/details/{pipeline_id}';
   static readonly pipelineExecutePath = '/manager/pipeline/execute/{pipeline_id}';
@@ -35,7 +35,7 @@ class PipelinesService extends __BaseService {
    * @param pipeline Pipeline Script
    * @return OK
    */
-  createPipelineResponse(pipeline: string): __Observable<__StrictHttpResponse<ManagerPipelineCreateResponse>> {
+  pipelineCreateResponse(pipeline: string): __Observable<__StrictHttpResponse<ManagerPipelineCreateResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -62,8 +62,8 @@ class PipelinesService extends __BaseService {
    * @param pipeline Pipeline Script
    * @return OK
    */
-  createPipeline(pipeline: string): __Observable<ManagerPipelineCreateResponse> {
-    return this.createPipelineResponse(pipeline).pipe(
+  pipelineCreate(pipeline: string): __Observable<ManagerPipelineCreateResponse> {
+    return this.pipelineCreateResponse(pipeline).pipe(
       __map(_r => _r.body as ManagerPipelineCreateResponse)
     );
   }
@@ -147,7 +147,7 @@ class PipelinesService extends __BaseService {
    *
    * - `pipeline_id`: Pipeline ID
    *
-   * - `pipeline`: Request Body
+   * - `execute_request`: Request Body
    *
    * @return OK
    */
@@ -156,7 +156,7 @@ class PipelinesService extends __BaseService {
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-    __body = params.pipeline;
+    __body = params.executeRequest;
     let req = new HttpRequest<any>(
       'POST',
       this.rootUrl + `/manager/pipeline/execute/${params.pipelineId}`,
@@ -180,7 +180,7 @@ class PipelinesService extends __BaseService {
    *
    * - `pipeline_id`: Pipeline ID
    *
-   * - `pipeline`: Request Body
+   * - `execute_request`: Request Body
    *
    * @return OK
    */
@@ -293,7 +293,7 @@ module PipelinesService {
     /**
      * Request Body
      */
-    pipeline: ManagerPipelineExecuteRequest;
+    executeRequest: ManagerPipelineExecuteRequest;
   }
 
   /**

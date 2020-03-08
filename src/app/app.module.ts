@@ -17,17 +17,17 @@ import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConsoleComponent } from './console/console.component';
-import { DetailsComponent } from './details/details.component';
-import { JoblistComponent } from './joblist/joblist.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
+import { JobListComponent } from './job-list/job-list.component';
 import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
-import { PipelinelistComponent } from './pipelinelist/pipelinelist.component';
+import { PipelineListComponent } from './pipeline-list/pipeline-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PipelinelistComponent,
-    JoblistComponent,
-    DetailsComponent,
+    PipelineListComponent,
+    JobListComponent,
+    JobDetailsComponent,
     ConsoleComponent,
     PipelineDetailsComponent,
   ],

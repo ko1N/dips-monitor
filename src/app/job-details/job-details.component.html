@@ -1,7 +1,6 @@
 <div class="details" *ngIf="job">
 
-    <!--
-    <mat-accordion *ngFor="let stage of job.stages; trackBy: trackStage">
+    <mat-accordion *ngFor="let stage of job.pipeline.pipeline.stages; trackBy: trackStage">
         <mat-card>
             {{ stage.name }}
         </mat-card>
@@ -20,5 +19,5 @@
         </mat-expansion-panel>
 
     </mat-accordion>
--->
+
 </div>

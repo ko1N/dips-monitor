@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
-import { ManagerJobInfoResponse, ModelJob } from '../api/models';
+import { ManagerJobInfoResponse, ModelJob, PipelineTask, PipelineStage } from '../api/models';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.sass']
+  selector: 'app-job-details',
+  templateUrl: './job-details.component.html',
+  styleUrls: ['./job-details.component.sass']
 })
-export class DetailsComponent implements OnInit, OnDestroy {
+export class JobDetailsComponent implements OnInit, OnDestroy {
 
   public routeSub: any;
   public jobID: string;
@@ -17,7 +17,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   public job: ModelJob;
 
-  constructor(public route: ActivatedRoute, public api: JobsService) { }
+  constructor(public route: ActivatedRoute, public jobsApi: JobsService) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
@@ -34,7 +34,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   loadDetails(): void {
-    this.api.jobInfo(this.jobID)
+    this.jobsApi.jobDetails(this.jobID)
       .subscribe((resp: ManagerJobInfoResponse) => {
         this.job = resp.job;
       });
@@ -48,15 +48,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.loadDetails();
     }, 1000);
   }
-  
-  /*
-  trackStage(index: number, item: ModelJobStage) {
+
+  trackStage(index: number, item: PipelineStage) {
     return index;
   }
 
-  trackTask(index: number, item: ModelJobStageTask) {
-    return item.id;
+  trackTask(index: number, item: PipelineTask) {
+    return index;
   }
-  */
 
 }

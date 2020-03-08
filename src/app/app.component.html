@@ -1,5 +1,13 @@
 <div class="container" fxLayout="column">
-    <mat-toolbar color="primary">dips-monitor</mat-toolbar>
+    <div>
+        <mat-toolbar color="primary">
+            <div class="menu" fxLayout="row" fxLayoutGap="10px">
+                <div fxFlex>dips-monitor</div>
+                <button mat-flat-button routerLink="/pipelines/">Pipelines</button>
+                <button mat-flat-button routerLink="/jobs/">Jobs</button>
+            </div>
+        </mat-toolbar>
+    </div>
     <div fxFlex>
         <router-outlet></router-outlet>
     </div>

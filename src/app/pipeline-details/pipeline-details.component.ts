@@ -19,9 +19,10 @@ export class PipelineDetailsComponent implements OnInit, OnDestroy {
   // script editor
   public editorOptions = { theme: 'vs-dark', language: 'yaml' };
 
-  constructor(public route: ActivatedRoute,
-              public pipelineApi: PipelinesService,
-              public router: Router) { }
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+    public pipelineApi: PipelinesService) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {

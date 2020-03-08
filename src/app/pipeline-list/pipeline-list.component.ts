@@ -3,15 +3,21 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-import { ManagerPipelineListResponse, ModelPipeline, ManagerSuccessResponse } from '../api/models';
+import {
+  ManagerPipelineCreateResponse,
+  ManagerPipelineExecuteRequest,
+  ManagerPipelineListResponse,
+  ManagerSuccessResponse,
+  ModelPipeline,
+} from '../api/models';
 import { PipelinesService } from '../api/services';
 
 @Component({
-  selector: 'app-pipelinelist',
-  templateUrl: './pipelinelist.component.html',
-  styleUrls: ['./pipelinelist.component.sass']
+  selector: 'app-pipeline-list',
+  templateUrl: './pipeline-list.component.html',
+  styleUrls: ['./pipeline-list.component.sass']
 })
-export class PipelinelistComponent implements OnInit {
+export class PipelineListComponent implements OnInit {
 
   public displayedColumns: string[] = ['id', 'name', 'options'];
 
@@ -19,7 +25,9 @@ export class PipelinelistComponent implements OnInit {
   public dataSource = new MatTableDataSource<ModelPipeline>(this.pipelines);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(public router: Router, public pipelineApi: PipelinesService) { }
+  constructor(
+    public router: Router,
+    public pipelineApi: PipelinesService) { }
 
   ngOnInit(): void {
     this.loadOverview();
@@ -38,7 +46,26 @@ export class PipelinelistComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  deleteRow(element: ModelPipeline): void {
+  createPipeline(): void {
+    this.pipelineApi.pipelineCreate(`---\nname: unnamed`)
+      .subscribe((resp: ManagerPipelineCreateResponse) => {
+        this.router.navigateByUrl(`/pipeline/${resp.pipeline.id}`);
+      });
+  }
+
+  executePipeline(element: ModelPipeline): void {
+    this.pipelineApi.pipelineExecute({
+      pipelineId: element.id,
+      executeRequest: {
+        name: `manual`,
+      } as ManagerPipelineExecuteRequest,
+    } as PipelinesService.PipelineExecuteParams)
+      .subscribe((resp: ManagerSuccessResponse) => {
+        // this.router.navigateByUrl(`/job/${resp.id}`);
+      });
+  }
+
+  deletePipeline(element: ModelPipeline): void {
     // TODO: confirm delete dialog
     this.pipelineApi.pipelineDelete(element.id)
       .subscribe((resp: ManagerSuccessResponse) => {

@@ -1,5 +1,5 @@
 /* tslint:disable */
 import { ModelJob } from './model-job';
-export interface ManagerJobInfoResponse {
+export interface ManagerJobDetailsResponse {
   job?: ModelJob;
 }
