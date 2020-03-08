@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,28 +11,36 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DetailsComponent } from './details/details.component';
-import { OverviewComponent } from './overview/overview.component';
 import { ConsoleComponent } from './console/console.component';
-
+import { DetailsComponent } from './details/details.component';
+import { JoblistComponent } from './joblist/joblist.component';
+import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
+import { PipelinelistComponent } from './pipelinelist/pipelinelist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OverviewComponent,
+    PipelinelistComponent,
+    JoblistComponent,
     DetailsComponent,
-    ConsoleComponent
+    ConsoleComponent,
+    PipelineDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    FlexLayoutModule,
     ApiModule.forRoot({ rootUrl: 'http://localhost:8080' }),
+    MonacoEditorModule.forRoot(),
     MatToolbarModule,
+    MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,

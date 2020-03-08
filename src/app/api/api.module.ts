@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
 import { JobsService } from './services/jobs.service';
+import { PipelinesService } from './services/pipelines.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -18,7 +19,8 @@ import { JobsService } from './services/jobs.service';
   declarations: [],
   providers: [
     ApiConfiguration,
-    JobsService
+    JobsService,
+    PipelinesService
   ],
 })
 export class ApiModule {

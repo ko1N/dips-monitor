@@ -1,11 +1,9 @@
 /* tslint:disable */
-import { ModelJobStage } from './model-job-stage';
+import { ModelPipeline } from './model-pipeline';
 export interface ModelJob {
   createdAt?: string;
   id?: string;
-  logs?: Array<string>;
-  pipeline?: string;
-  progress?: number;
-  stages?: Array<ModelJobStage>;
+  name?: string;
+  pipeline?: ModelPipeline;
   updatedAt?: string;
 }

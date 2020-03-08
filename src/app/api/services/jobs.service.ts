@@ -7,14 +7,12 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { ManagerSuccessResponse } from '../models/manager-success-response';
 import { ManagerJobInfoResponse } from '../models/manager-job-info-response';
 import { ManagerJobListResponse } from '../models/manager-job-list-response';
 @Injectable({
   providedIn: 'root',
 })
 class JobsService extends __BaseService {
-  static readonly executeJobPath = '/manager/job/execute';
   static readonly jobInfoPath = '/manager/job/info/{job_id}';
   static readonly jobListPath = '/manager/job/list';
 
@@ -23,44 +21,6 @@ class JobsService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
-  }
-
-  /**
-   * This method will execute the job sent via the post body
-   * @param pipeline Pipeline Script
-   * @return OK
-   */
-  executeJobResponse(pipeline: string): __Observable<__StrictHttpResponse<ManagerSuccessResponse>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = pipeline;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/manager/job/execute`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<ManagerSuccessResponse>;
-      })
-    );
-  }
-  /**
-   * This method will execute the job sent via the post body
-   * @param pipeline Pipeline Script
-   * @return OK
-   */
-  executeJob(pipeline: string): __Observable<ManagerSuccessResponse> {
-    return this.executeJobResponse(pipeline).pipe(
-      __map(_r => _r.body as ManagerSuccessResponse)
-    );
   }
 
   /**

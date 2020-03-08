@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
-import { ManagerJobInfoResponse, ModelJob, ModelJobStageTask, ModelJobStage } from '../api/models';
+import { ManagerJobInfoResponse, ModelJob } from '../api/models';
 
 @Component({
   selector: 'app-details',
@@ -49,6 +49,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   
+  /*
   trackStage(index: number, item: ModelJobStage) {
     return index;
   }
@@ -56,5 +57,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   trackTask(index: number, item: ModelJobStageTask) {
     return item.id;
   }
+  */
 
 }

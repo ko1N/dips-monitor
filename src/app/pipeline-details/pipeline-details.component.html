@@ -1,0 +1,18 @@
+<div class="container" *ngIf="pipeline">
+    <div fxLayout="column">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ pipeline.name }} (Revision: {{ pipeline.revision }})</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="pipeline.script"></ngx-monaco-editor>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button (click)="save()">Save</button>
+                <button mat-flat-button (click)="close()">Cancel</button>
+              </mat-card-actions>
+        </mat-card>
+
+    </div>
+</div>

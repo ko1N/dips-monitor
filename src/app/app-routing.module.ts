@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OverviewComponent } from './overview/overview.component';
 import { DetailsComponent } from './details/details.component';
+import { JoblistComponent } from './joblist/joblist.component';
+import { PipelinelistComponent } from './pipelinelist/pipelinelist.component';
+import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'overview', pathMatch: 'full' },
-  { path: 'overview', component: OverviewComponent },
+  { path: '', redirectTo: 'pipelines', pathMatch: 'full' },
+  { path: 'pipelines', component: PipelinelistComponent },
+  { path: 'pipeline/:pipeline_id', component: PipelineDetailsComponent },
+  { path: 'jobs', component: JoblistComponent },
   { path: 'details/:job_id', component: DetailsComponent },
 ];
 
