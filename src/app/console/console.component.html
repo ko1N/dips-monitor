@@ -1,3 +1,10 @@
 <div #console class="console">
-    <div #line class="line" *ngFor="let msg of messages">{{ msg }}</div>
+    <div #line class="line" *ngFor="let msg of messages; index as idx; trackBy: trackLine">
+        <div fxLayout="row">
+            <div fxFlex="80px" class="number">{{ idx + 1 }}</div>
+            <div [ngClass]="getMessageClass(msg)">
+                <span *ngIf="msg.type === 2">$ </span>{{ msg.message }}
+            </div>
+        </div>
+    </div>
 </div>

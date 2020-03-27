@@ -57,7 +57,7 @@ export class PipelineListComponent implements OnInit {
     this.pipelineApi.pipelineExecute({
       pipelineId: element.id,
       executeRequest: {
-        name: `manual`,
+        name: `${element.name} (via webclient)`,
       } as ManagerPipelineExecuteRequest,
     } as PipelinesService.PipelineExecuteParams)
       .subscribe((resp: ManagerSuccessResponse) => {

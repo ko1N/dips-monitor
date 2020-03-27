@@ -1,5 +1,18 @@
 import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild, AfterViewInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 
+enum ConsoleMessageType {
+  Status = 0,
+  Error = 1,
+  StdIn = 2,
+  StdOut = 3,
+  StdErr = 4,
+}
+
+export class ConsoleMessage {
+  type: ConsoleMessageType;
+  message: string;
+}
+
 @Component({
   selector: 'app-console',
   templateUrl: './console.component.html',
@@ -7,8 +20,7 @@ import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewC
 })
 export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
-  // TODO: struct with type stdout/stderr for colorization!
-  @Input() messages: Array<string>;
+  @Input() messages: Array<ConsoleMessage>;
 
   @ViewChild('console', { static: false }) console;
   @ViewChildren('line') lines: QueryList<any>;
@@ -29,6 +41,25 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     this.linesSub.unsubscribe();
+  }
+
+  private getMessageClass(message: ConsoleMessage) {
+    switch (message.type) {
+      case ConsoleMessageType.Status:
+        return `status`;
+      case ConsoleMessageType.Error:
+        return `error`;
+      case ConsoleMessageType.StdIn:
+        return `stdin`;
+      case ConsoleMessageType.StdOut:
+        return `stdout`;
+      case ConsoleMessageType.StdErr:
+        return `stderr`;
+    }
+  }
+
+  trackLine(index: number, item: any) {
+    return index;
   }
 
   private onLinesChanged(): void {

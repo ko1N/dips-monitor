@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
 import { ModelJob, PipelineTask, PipelineStage, ManagerJobDetailsResponse, MessagesMessage } from '../api/models';
+import { ConsoleMessage } from '../console/console.component';
 
 @Component({
   selector: 'app-job-details',
@@ -16,7 +17,7 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
   public timer: any;
 
   public job: ModelJob;
-  public messages: string[];
+  public messages: ConsoleMessage[];
 
   constructor(public route: ActivatedRoute, public jobsApi: JobsService) { }
 
@@ -42,12 +43,10 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
       .subscribe((resp: ManagerJobDetailsResponse) => {
         this.job = resp.job;
         this.messages = resp.messages?.map(m => {
-          switch (m.type) {
-            case 0:
-              return `stdout > ${m.message}`;
-            case 1:
-              return `stderr > ${m.message}`;
-            }
+          return {
+            type: m.type,
+            message: m.message,
+          } as ConsoleMessage;
         });
       });
   }
