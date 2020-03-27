@@ -15,9 +15,10 @@
                     ({{ task.progress }}%)
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <app-console [messages]="task.stdout"></app-console>
         </mat-expansion-panel>
 
     </mat-accordion>
+
+    <app-console [messages]="messages"></app-console>
 
 </div>

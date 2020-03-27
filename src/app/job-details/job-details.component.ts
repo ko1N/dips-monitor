@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
-import { ManagerJobInfoResponse, ModelJob, PipelineTask, PipelineStage } from '../api/models';
+import { ModelJob, PipelineTask, PipelineStage, ManagerJobDetailsResponse } from '../api/models';
 
 @Component({
   selector: 'app-job-details',
@@ -16,6 +16,7 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
   public timer: any;
 
   public job: ModelJob;
+  public messages: string[];
 
   constructor(public route: ActivatedRoute, public jobsApi: JobsService) { }
 
@@ -30,13 +31,17 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.timer !== null) {
+      clearInterval(this.timer);
+    }
     this.routeSub.unsubscribe();
   }
 
   loadDetails(): void {
     this.jobsApi.jobDetails(this.jobID)
-      .subscribe((resp: ManagerJobInfoResponse) => {
+      .subscribe((resp: ManagerJobDetailsResponse) => {
         this.job = resp.job;
+        this.messages = resp.messages;
       });
   }
 
