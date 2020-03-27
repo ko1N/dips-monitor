@@ -7,9 +7,7 @@ import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewC
 })
 export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
-  ngOnChanges(): void {
-    this.onLinesChanged();
-  }
+  // TODO: struct with type stdout/stderr for colorization!
   @Input() messages: Array<string>;
 
   @ViewChild('console', { static: false }) console;
@@ -23,6 +21,10 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
   ngAfterViewInit(): void {
     this.consoleContainer = this.console.nativeElement;
     this.linesSub = this.lines.changes.subscribe(_ => this.onLinesChanged());
+  }
+
+  ngOnChanges(): void {
+    this.onLinesChanged();
   }
 
   ngOnDestroy(): void {

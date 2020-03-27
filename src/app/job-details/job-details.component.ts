@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
-import { ModelJob, PipelineTask, PipelineStage, ManagerJobDetailsResponse } from '../api/models';
+import { ModelJob, PipelineTask, PipelineStage, ManagerJobDetailsResponse, MessagesMessage } from '../api/models';
 
 @Component({
   selector: 'app-job-details',
@@ -41,7 +41,14 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
     this.jobsApi.jobDetails(this.jobID)
       .subscribe((resp: ManagerJobDetailsResponse) => {
         this.job = resp.job;
-        this.messages = resp.messages;
+        this.messages = resp.messages?.map(m => {
+          switch (m.type) {
+            case 0:
+              return `stdout > ${m.message}`;
+            case 1:
+              return `stderr > ${m.message}`;
+            }
+        });
       });
   }
 

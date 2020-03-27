@@ -6,6 +6,7 @@ export { ManagerPipelineDetailsResponse } from './models/manager-pipeline-detail
 export { ManagerPipelineExecuteRequest } from './models/manager-pipeline-execute-request';
 export { ManagerPipelineListResponse } from './models/manager-pipeline-list-response';
 export { ManagerSuccessResponse } from './models/manager-success-response';
+export { MessagesMessage } from './models/messages-message';
 export { ModelJob } from './models/model-job';
 export { ModelPipeline } from './models/model-pipeline';
 export { PipelineCommand } from './models/pipeline-command';
