@@ -43,7 +43,7 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
     this.linesSub.unsubscribe();
   }
 
-  private getMessageClass(message: ConsoleMessage) {
+  getMessageClass(message: ConsoleMessage) {
     switch (message.type) {
       case ConsoleMessageType.Status:
         return `status`;
@@ -69,13 +69,13 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
   private scrollToBottom(): void {
     if (this.consoleContainer) {
       // -2 is required because we have a top/bottom border of 1px each
-      if (this.consoleContainer.scrollTop - 2 === (this.consoleContainer.scrollHeight - this.consoleContainer.offsetHeight)) {
+      //if (this.consoleContainer.scrollTop - 2 === (this.consoleContainer.scrollHeight - this.consoleContainer.offsetHeight)) {
         this.consoleContainer.scroll({
           top: this.consoleContainer.scrollHeight,
           left: 0,
           behavior: 'smooth'
         });
-      }
+      //}
     }
   }
 

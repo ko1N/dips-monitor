@@ -53,18 +53,6 @@ export class PipelineListComponent implements OnInit {
       });
   }
 
-  executePipeline(element: ModelPipeline): void {
-    this.pipelineApi.pipelineExecute({
-      pipelineId: element.id,
-      executeRequest: {
-        name: `${element.name} (via webclient)`,
-      } as ManagerPipelineExecuteRequest,
-    } as PipelinesService.PipelineExecuteParams)
-      .subscribe((resp: ManagerSuccessResponse) => {
-        // this.router.navigateByUrl(`/job/${resp.id}`);
-      });
-  }
-
   deletePipeline(element: ModelPipeline): void {
     // TODO: confirm delete dialog
     this.pipelineApi.pipelineDelete(element.id)

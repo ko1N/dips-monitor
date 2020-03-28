@@ -5,11 +5,13 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
 import { PipelineListComponent } from './pipeline-list/pipeline-list.component';
+import { PipelineExecuteComponent } from './pipeline-execute/pipeline-execute.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'pipelines', pathMatch: 'full' },
   { path: 'pipelines', component: PipelineListComponent },
   { path: 'pipeline/:pipeline_id', component: PipelineDetailsComponent },
+  { path: 'execute/:pipeline_id', component: PipelineExecuteComponent },
   { path: 'jobs', component: JobListComponent },
   { path: 'job/:job_id', component: JobDetailsComponent },
 ];

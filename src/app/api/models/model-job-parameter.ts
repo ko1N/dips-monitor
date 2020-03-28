@@ -1,5 +1,5 @@
 /* tslint:disable */
-export interface PipelineVariable {
+export interface ModelJobParameter {
   name?: string;
   value?: string;
 }

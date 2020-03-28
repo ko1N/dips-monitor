@@ -21,6 +21,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
 import { PipelineListComponent } from './pipeline-list/pipeline-list.component';
+import { PipelineExecuteComponent } from './pipeline-execute/pipeline-execute.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PipelineListComponent } from './pipeline-list/pipeline-list.component';
     JobDetailsComponent,
     ConsoleComponent,
     PipelineDetailsComponent,
+    PipelineExecuteComponent,
   ],
   imports: [
     BrowserModule,
