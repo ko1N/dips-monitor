@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JobsService } from '../api/services';
-import { ModelJob, PipelineTask, PipelineStage, ManagerJobDetailsResponse, MessagesMessage } from '../api/models';
+import { ModelJob, ManagerJobDetailsResponse, MessagesMessage } from '../api/models';
 import { ConsoleMessage } from '../console/console.component';
 
 @Component({
@@ -60,11 +60,11 @@ export class JobDetailsComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  trackStage(index: number, item: PipelineStage) {
+  trackStage(index: number, item: any /*PipelineStage*/) {
     return index;
   }
 
-  trackTask(index: number, item: PipelineTask) {
+  trackTask(index: number, item: any /*PipelineTask*/) {
     return index;
   }
 

@@ -10,8 +10,9 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { ManagerPipelineCreateResponse } from '../models/manager-pipeline-create-response';
 import { ManagerPipelineListResponse } from '../models/manager-pipeline-list-response';
 import { ManagerPipelineDetailsResponse } from '../models/manager-pipeline-details-response';
-import { ManagerSuccessResponse } from '../models/manager-success-response';
+import { ManagerPipelineExecuteResponse } from '../models/manager-pipeline-execute-response';
 import { ManagerPipelineExecuteRequest } from '../models/manager-pipeline-execute-request';
+import { ManagerSuccessResponse } from '../models/manager-success-response';
 @Injectable({
   providedIn: 'root',
 })
@@ -151,7 +152,7 @@ class PipelinesService extends __BaseService {
    *
    * @return OK
    */
-  pipelineExecuteResponse(params: PipelinesService.PipelineExecuteParams): __Observable<__StrictHttpResponse<ManagerSuccessResponse>> {
+  pipelineExecuteResponse(params: PipelinesService.PipelineExecuteParams): __Observable<__StrictHttpResponse<ManagerPipelineExecuteResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -170,7 +171,7 @@ class PipelinesService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<ManagerSuccessResponse>;
+        return _r as __StrictHttpResponse<ManagerPipelineExecuteResponse>;
       })
     );
   }
@@ -184,9 +185,9 @@ class PipelinesService extends __BaseService {
    *
    * @return OK
    */
-  pipelineExecute(params: PipelinesService.PipelineExecuteParams): __Observable<ManagerSuccessResponse> {
+  pipelineExecute(params: PipelinesService.PipelineExecuteParams): __Observable<ManagerPipelineExecuteResponse> {
     return this.pipelineExecuteResponse(params).pipe(
-      __map(_r => _r.body as ManagerSuccessResponse)
+      __map(_r => _r.body as ManagerPipelineExecuteResponse)
     );
   }
 

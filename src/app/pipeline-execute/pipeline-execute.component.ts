@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ModelPipeline, ManagerPipelineDetailsResponse, ManagerPipelineExecuteRequest, ManagerSuccessResponse } from '../api/models';
+import { ModelPipeline, ManagerPipelineDetailsResponse, ManagerPipelineExecuteRequest, ManagerSuccessResponse, ManagerPipelineExecuteResponse } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PipelinesService } from '../api/services';
 import { FormGroup } from '@angular/forms';
@@ -49,7 +49,7 @@ export class PipelineExecuteComponent implements OnInit, OnDestroy {
         //parameters:
       } as ManagerPipelineExecuteRequest,
     } as PipelinesService.PipelineExecuteParams)
-      .subscribe((resp: ManagerSuccessResponse) => {
+      .subscribe((resp: ManagerPipelineExecuteResponse) => {
         this.router.navigateByUrl(`/jobs`);
       });
   }
