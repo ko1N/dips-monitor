@@ -1,11 +1,14 @@
 import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild, AfterViewInit, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 
 enum ConsoleMessageType {
-  Status = 0,
-  Error = 1,
-  StdIn = 2,
-  StdOut = 3,
-  StdErr = 4,
+  Debug = 0,
+  Info = 1,
+  Warn = 2,
+  Error = 3,
+  Crit = 4,
+
+  StdOut = 10,
+  StdErr = 11,
 }
 
 export class ConsoleMessage {
@@ -21,6 +24,7 @@ export class ConsoleMessage {
 export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   @Input() messages: Array<ConsoleMessage>;
+  private messagesLength = 0;
 
   @ViewChild('console', { static: false }) console;
   @ViewChildren('line') lines: QueryList<any>;
@@ -45,12 +49,17 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   getMessageClass(message: ConsoleMessage) {
     switch (message.type) {
-      case ConsoleMessageType.Status:
-        return `status`;
+      case ConsoleMessageType.Debug:
+        return `debug`;
+      case ConsoleMessageType.Info:
+        return `info`;
+      case ConsoleMessageType.Warn:
+        return `warn`;
       case ConsoleMessageType.Error:
         return `error`;
-      case ConsoleMessageType.StdIn:
-        return `stdin`;
+      case ConsoleMessageType.Crit:
+        return `crit`;
+
       case ConsoleMessageType.StdOut:
         return `stdout`;
       case ConsoleMessageType.StdErr:
@@ -63,18 +72,21 @@ export class ConsoleComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   private onLinesChanged(): void {
-    this.scrollToBottom();
+    if (this.messages.length > this.messagesLength) {
+      this.scrollToBottom();
+      this.messagesLength = this.messages.length;
+    }
   }
 
   private scrollToBottom(): void {
     if (this.consoleContainer) {
       // -2 is required because we have a top/bottom border of 1px each
       //if (this.consoleContainer.scrollTop - 2 === (this.consoleContainer.scrollHeight - this.consoleContainer.offsetHeight)) {
-        this.consoleContainer.scroll({
-          top: this.consoleContainer.scrollHeight,
-          left: 0,
-          behavior: 'smooth'
-        });
+      this.consoleContainer.scroll({
+        top: this.consoleContainer.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
       //}
     }
   }
