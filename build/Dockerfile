@@ -8,7 +8,7 @@ RUN npm install
 RUN ng build --prod --base-href /
 
 FROM nginx:latest
-COPY --from=builder /app/dist/relay-radar /usr/share/nginx/html/
+COPY --from=builder /app/dist/dips-monitor /usr/share/nginx/html/
 
 WORKDIR /usr/share/nginx/html/
 ADD build/nginx.conf /etc/nginx/conf.d/default.conf
