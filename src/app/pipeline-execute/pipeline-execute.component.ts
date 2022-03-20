@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModelPipeline, ManagerPipelineDetailsResponse, ManagerPipelineExecuteRequest, ManagerSuccessResponse, ManagerPipelineExecuteResponse } from '../api/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PipelinesService } from '../api/services';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pipeline-execute',
@@ -16,10 +16,13 @@ export class PipelineExecuteComponent implements OnInit, OnDestroy {
 
   public pipeline: ModelPipeline;
 
+  public parameters: FormGroup;
+
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public pipelineApi: PipelinesService) { }
+    public pipelineApi: PipelinesService) {
+  }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
@@ -37,7 +40,15 @@ export class PipelineExecuteComponent implements OnInit, OnDestroy {
   loadDetails(): void {
     this.pipelineApi.pipelineDetails(this.pipelineID)
       .subscribe((resp: ManagerPipelineDetailsResponse) => {
+        // update pipeline
         this.pipeline = resp.pipeline;
+
+        // rebuild form
+        let form = {};
+        for (let p of this.pipeline.pipeline.parameters) {
+          form[p] = new FormControl('', Validators.required);
+        }
+        this.parameters = new FormGroup(form);
       });
   }
 
@@ -46,7 +57,7 @@ export class PipelineExecuteComponent implements OnInit, OnDestroy {
       pipelineId: this.pipeline.id,
       executeRequest: {
         name: `${this.pipeline.name} (via webclient)`,
-        //parameters:
+        parameters: this.parameters.value,
       } as ManagerPipelineExecuteRequest,
     } as PipelinesService.PipelineExecuteParams)
       .subscribe((resp: ManagerPipelineExecuteResponse) => {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -48,6 +48,7 @@ import { PipelineExecuteComponent } from './pipeline-execute/pipeline-execute.co
     MatCardModule,
     MatExpansionModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatInputModule,
   ],
   providers: [],

@@ -1,8 +1,8 @@
 <div fxLayout="column" class="container">
     <div fxFill *ngIf="job">
 
-        <!--
         <mat-accordion *ngFor="let stage of job.pipeline.pipeline.stages; trackBy: trackStage">
+            
             <mat-card>
                 {{ stage.name }}
             </mat-card>
@@ -11,7 +11,7 @@
             <mat-expansion-panel *ngFor="let task of stage.tasks; trackBy: trackTask">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{ task.name }}
+                        {{ task.name != "" ? task.name : task.service }}
                     </mat-panel-title>
                     <mat-panel-description>
                         ({{ task.progress }}%)
@@ -20,7 +20,7 @@
             </mat-expansion-panel>
 
         </mat-accordion>
-        -->
+        <p></p>
 
         <app-console [messages]="messages"></app-console>
 

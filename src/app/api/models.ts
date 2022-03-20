@@ -10,3 +10,7 @@ export { ManagerSuccessResponse } from './models/manager-success-response';
 export { MessagesMessage } from './models/messages-message';
 export { ModelJob } from './models/model-job';
 export { ModelPipeline } from './models/model-pipeline';
+export { PipelineExpression } from './models/pipeline-expression';
+export { PipelinePipeline } from './models/pipeline-pipeline';
+export { PipelineStage } from './models/pipeline-stage';
+export { PipelineTask } from './models/pipeline-task';

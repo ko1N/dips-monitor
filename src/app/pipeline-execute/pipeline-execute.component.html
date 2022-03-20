@@ -1,15 +1,14 @@
 <div class="container" *ngIf="pipeline">
 
-    <!--
-        TODO: add dynamic pipeline input params
-    <div *ngFor="let param of pipeline?.pipeline?.parameters">
-        <mat-form-field appearance="fill">
-            <mat-label>{{ param.name }}</mat-label>
-            <input matInput>
-        </mat-form-field>
-        <br>
-    </div>
-    -->
+    <form *ngIf="parameters" [formGroup]="parameters">
+        <div *ngFor="let param of pipeline.pipeline?.parameters">
+            <mat-form-field appearance="fill">
+                <mat-label>{{ param }}</mat-label>
+                <input matInput [formControlName]="param">
+            </mat-form-field>
+            <br>
+        </div>
+    </form>
 
     <button mat-flat-button (click)="execute()">Execute</button>
     <button mat-flat-button (click)="close()">Cancel</button>
