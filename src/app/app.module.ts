@@ -22,6 +22,7 @@ import { JobListComponent } from './job-list/job-list.component';
 import { PipelineDetailsComponent } from './pipeline-details/pipeline-details.component';
 import { PipelineListComponent } from './pipeline-list/pipeline-list.component';
 import { PipelineExecuteComponent } from './pipeline-execute/pipeline-execute.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { PipelineExecuteComponent } from './pipeline-execute/pipeline-execute.co
     BrowserAnimationsModule,
     FormsModule,
     FlexLayoutModule,
-    ApiModule.forRoot({ rootUrl: 'http://localhost:8080' }),
+    ApiModule.forRoot({ rootUrl: environment.rootUrl }),
     MonacoEditorModule.forRoot(),
     MatToolbarModule,
     MatButtonModule,
