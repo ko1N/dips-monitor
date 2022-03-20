@@ -4,7 +4,7 @@
             <div fxLayout="row">
                 <div fxFlex="80px" class="number">{{ idx + 1 }}</div>
                 <div [ngClass]="getMessageClass(msg)">
-                    <span *ngIf="msg.type === 2">$ </span>{{ msg.message }}
+                    <span *ngIf="msg.type === 2">$ </span><pre>{{ msg.message }}</pre>
                 </div>
             </div>
         </div>
