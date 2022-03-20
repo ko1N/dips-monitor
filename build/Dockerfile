@@ -1,9 +1,9 @@
 # build frontend
-FROM node:17 as builder
+FROM node:15 as builder
 WORKDIR /app
 COPY . .
 
-RUN npm install -g @angular/cli@13.0.3
+RUN npm install -g @angular/cli@9.0.4
 RUN npm install
 RUN ng build --prod --base-href /
 
